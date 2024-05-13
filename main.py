@@ -15,7 +15,8 @@ class SolarClock(App):
         Window.maximize()
         Window.borderless = True
 
-        Builder.load_file("views/common.kv") 
+        Builder.load_file("widgets/clock.kv") 
+        Builder.load_file("views/common.kv")
         Builder.load_file("views/homescreen.kv") 
         Builder.load_file("views/mode_hourly.kv")
 

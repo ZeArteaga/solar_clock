@@ -1,5 +1,5 @@
 from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import StringProperty, OptionProperty
+from kivy.properties import StringProperty, OptionProperty, NumericProperty
 from kivy.clock import Clock
 from datetime import datetime
 
@@ -8,6 +8,8 @@ class ClockWidget(BoxLayout):
     label_alignment = OptionProperty('center', options=['left', 'center', 'right'])
     current_time = StringProperty()
     todays_date = StringProperty()
+    time_fontsize = NumericProperty()
+    date_fontsize = NumericProperty()
 
     def __init__(self, **kwargs):
         super(ClockWidget, self).__init__(**kwargs)

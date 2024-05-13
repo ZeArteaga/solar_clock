@@ -1,6 +1,5 @@
 #:set button_size_hint 0.2, 0.60
 #:set header_pos_hint 1, 0.30
-#:include widgets/clock.kv
 
 <Screen_Home>:
     Home:
@@ -81,6 +80,8 @@
 
     ClockWidget:
         label_alignment: "left"
+        date_fontsize: 18
+        time_fontsize: 35
         pos_hint: {"x": 0.80}
         size_hint: .75, 1
         padding: "30dp", "0dp"

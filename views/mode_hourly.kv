@@ -1,4 +1,20 @@
 <Screen_Hourly>:
-    Button:
-        text: "Go back to menu"
-        on_release: root.manager.current = "homescreen"
+    canvas.before:
+        Rectangle:
+            size: self.size
+            source: 'assets/images/background_logos.jpg'
+    
+    BoxLayout:
+        orientation: "vertical"
+        
+        ClockWidget:
+            label_alignment: "center"
+            date_fontsize: 20
+            time_fontsize: 65
+            size_hint: 0.2, 0.8
+            pos_hint: {"center_x": 0.5, "top": 0.2}
+        Button:
+            pos_hint: {"center_x": 0.5, "y": 0.2}
+            size_hint: 1, 0.2
+            text: "Go back to menu"
+            on_release: root.manager.current = "homescreen"

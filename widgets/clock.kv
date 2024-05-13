@@ -1,0 +1,25 @@
+#:import clock widgets.clock.ClockWidget
+
+<ClockWidget>:
+    orientation: "vertical"
+    spacing: "2dp"
+
+    Label:
+        size_hint: 1, 0.7
+        text: root.current_time
+        color: 0,0,0,1
+        font_name: "Aptos"
+        bold: True
+        font_size: 35
+        text_size: self.size
+        halign: root.label_alignment
+
+    Label:
+        size_hint: 1, 0.3
+        text: root.todays_date
+        color: 0,0,0,1
+        font_name: "Aptos"
+        bold: True
+        font_size: 18
+        text_size: self.size
+        halign: root.label_alignment

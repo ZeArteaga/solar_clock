@@ -5,9 +5,9 @@ from kivy.app import App
 from kivy.app import Builder
 from kivy.core.window import Window
 from kivy.core.text import LabelBase
-from kivy.uix.screenmanager import ScreenManager
+from kivy.uix.screenmanager import ScreenManager, FadeTransition
 from controllers.homescreen import Screen_Home
-from controllers.mode_hourly import Screen_Hourly                            
+from controllers.mode_hourly import Screen_Hourly      
 
 class SolarClock(App):
 
@@ -25,7 +25,7 @@ class SolarClock(App):
                    fn_italic="assets/fonts/aptos/aptos-italic.ttf"
                    )           
         
-        sm = ScreenManager()
+        sm = ScreenManager(transition=FadeTransition())
         sm.add_widget(Screen_Home(name='homescreen'))
         sm.add_widget(Screen_Hourly(name='hourly'))
         

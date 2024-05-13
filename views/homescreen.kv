@@ -1,5 +1,6 @@
 #:set button_size_hint 0.2, 0.60
 #:set header_pos_hint 1, 0.30
+#:include widgets/clock.kv
 
 <Screen_Home>:
     Home:
@@ -78,32 +79,11 @@
             width: dp(1)
             points: self.x, self.y, self.width, self.y
 
-    BoxLayout:
-        orientation: "vertical"
+    ClockWidget:
+        label_alignment: "left"
         pos_hint: {"x": 0.80}
         size_hint: .75, 1
         padding: "30dp", "0dp"
-        spacing: "2dp"
-
-        Label:
-            size_hint: 1, 0.7
-            text: root.current_time
-            color: 0,0,0,1
-            font_name: "Aptos"
-            bold: True
-            font_size: 35
-            text_size: self.size
-            halign: "left"  
-
-        Label:
-            size_hint: 1, 0.3
-            text: root.todays_date
-            color: 0,0,0,1
-            font_name: "Aptos"
-            bold: True
-            font_size: 18
-            text_size: self.size
-            halign: "left"
 
     Image:
         source: "assets/images/logo_full.png"

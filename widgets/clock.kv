@@ -2,36 +2,27 @@
 
 <ClockWidget>:
     orientation: "vertical"
-    #DEBUG
-    canvas.before:
-        Color:
-            rgba: 1,1,1,1
-        Rectangle:
-            size: self.size
-            pos: self.pos
     Label:
         size_hint: 1, None
         height: self.texture_size[1]
-        size: self.texture_size
         text: root.current_time
         color: 0,0,0,1
         font_name: "Aptos"
         bold: True
         font_size: root.time_fontsize
-        text_size: self.width, None
-        halign: root.label_alignment
-        valign: "center"
+        #text_size: self.width, None
+        #halign: root.label_alignment
+        #valign: "center"
 
     Label:
         size_hint: 1, None
         height: self.texture_size[1]
-        size: self.texture_size
         text: root.todays_date
         color: 0,0,0,1
         font_name: "Aptos"
         bold: True
         font_size: root.date_fontsize
-        text_size: self.width, None
-        halign: root.label_alignment
-        valign: "center"
+        #text_size: self.width, None
+        #halign: root.label_alignment
+        #valign: "center"
 

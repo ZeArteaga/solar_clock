@@ -8,6 +8,7 @@
 #:set rgba_blue 0.678,0.847,0.902,1
 
 <Screen_Hourly>:
+    #background with logos
     canvas.before:
         Color:
             rgba: rgba_green
@@ -17,49 +18,54 @@
             rgba: 1, 1, 1, 0.45      
         Rectangle:
             size: self.size
-            source: 'assets/images/background_logos.png'  
-        
+            source: 'assets/images/background_logos.png'
+
+    #Homescreen Button
+    Button:
+        size_hint: 0.15, 0.15
+        pos_hint: {"top": 1, "right": 1}
+        background_normal: "assets/images/button_home.png"
+        on_release: root.manager.current = "homescreen"
+    
     BoxLayout:
-        orientation: "vertical"
-        size_hint: 1, None
-        pos_hint: {"y": 0.4}
         #DEBUG
-        canvas.before:
-            Color:
-                rgba: rgba_red
-            Rectangle:
-                size: self.size
-                pos: self.pos
-        BoxLayout:
-            orientation: "horizontal"
-            padding: "30dp"
-            spacing: "3dp"
-            CircleButton:
-                size_hint: 0.05, 1
-                pos_hint: {"center_x": 0.35, "center_y": 0.5}
-                icon: "assets/images/arrow_left.png"
-            ClockWidget:
-                label_alignment: "center"
-                date_fontsize: 21
-                time_fontsize: 90
-                size_hint: 0.4, 1
-                pos_hint: {"center_x": 0.5, "center_y": 0.5}
-            CircleButton:
-                size_hint: 0.05, 1
-                pos_hint: {"center_x": 0.65, "center_y": 0.5}
-                icon: "assets/images/arrow_right.png"
-      # Button:
-      #     pos_hint: {"center_x": 0.5, "y": 0}
-      #     size_hint: 1, 0.3
-      #     text: "Go back to menu"
-      #     on_release: root.manager.current = "homescreen"
+        #canvas.before:
+        #    Color:
+        #        rgba: rgba_yellow
+        #    Rectangle:
+        #        size: self.size
+        #        pos: self.pos
+        orientation: "horizontal"
+        size_hint: 1, None
+        height: root.ids.clock.minimum_height
+        pos_hint: {"y": 0.4}
+        padding: "30dp"
+        spacing: "3dp"
+        CircleButton:
+            size_hint: 0.1, 0.8
+            pos_hint: {"center_x": 0.35, "top": 1}
+            icon: "assets/images/arrow_left.png"
+            icon_size: 0.7
+        ClockWidget:
+            id: clock
+            label_alignment: "center"
+            date_fontsize: 21
+            time_fontsize: 90
+            size_hint: 0.4, None
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+        CircleButton:
+            size_hint: 0.1, 0.8
+            pos_hint: {"center_x": 0.65, "top": 1}
+            icon: "assets/images/arrow_right.png"
+            icon_size: 0.7
+    
 
 <CircleButton@Button>:
     id: circ_btn
     background_normal: ''
     background_color: 0, 0, 0, 0
     icon: ""
-    icon_frac: 0.65
+    icon_size: 1
     canvas.before:
         #white background
         Color:
@@ -76,6 +82,6 @@
    # Draw the icon
     Image:
         size_hint: None, None
-        size: circ_btn.width * circ_btn.icon_frac, circ_btn.height * circ_btn.icon_frac
+        size: circ_btn.width * circ_btn.icon_size, circ_btn.height * circ_btn.icon_size
         pos: circ_btn.center_x - self.width / 2, circ_btn.center_y - self.height / 2
         source: circ_btn.icon

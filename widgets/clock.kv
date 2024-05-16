@@ -2,7 +2,13 @@
 
 <ClockWidget>:
     orientation: "vertical"
-
+    #DEBUG
+    canvas.before:
+        Color:
+            rgba: 1,1,1,1
+        Rectangle:
+            size: self.size
+            pos: self.pos
     Label:
         size_hint: 1, None
         height: self.texture_size[1]

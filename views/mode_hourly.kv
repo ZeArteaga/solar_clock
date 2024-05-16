@@ -1,20 +1,81 @@
+##:set rgb_green hex_to_rgb("B4E5A2")
+##:set rgb_yellow hex_to_rgb("FFFF8F")
+##:set rgb_red hex_to_rgb("FF9B9B")
+##:set rgb_blue hex_to_rgb("96DCF8")
+#:set rgba_green 0.5,1,0.5,1
+#:set rgba_yellow 1,1,0,1
+#:set rgba_red 1,0.5,0.5,1
+#:set rgba_blue 0.678,0.847,0.902,1
+
 <Screen_Hourly>:
     canvas.before:
+        Color:
+            rgba: rgba_green
         Rectangle:
             size: self.size
-            source: 'assets/images/background_logos.jpg'
-    
+        Color:
+            rgba: 1, 1, 1, 0.45      
+        Rectangle:
+            size: self.size
+            source: 'assets/images/background_logos.png'  
+        
     BoxLayout:
         orientation: "vertical"
-        
-        ClockWidget:
-            label_alignment: "center"
-            date_fontsize: 21
-            time_fontsize: 90
-            size_hint: 1, 0.8
-            pos_hint: {"center_x": 0.5, "top": 0.2}
-        Button:
-            pos_hint: {"center_x": 0.5, "y": 0.2}
-            size_hint: 1, 0.2
-            text: "Go back to menu"
-            on_release: root.manager.current = "homescreen"
+        size_hint: 1, None
+        pos_hint: {"y": 0.4}
+        #DEBUG
+        canvas.before:
+            Color:
+                rgba: rgba_red
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        BoxLayout:
+            orientation: "horizontal"
+            padding: "30dp"
+            spacing: "3dp"
+            CircleButton:
+                size_hint: 0.05, 1
+                pos_hint: {"center_x": 0.35, "center_y": 0.5}
+                icon: "assets/images/arrow_left.png"
+            ClockWidget:
+                label_alignment: "center"
+                date_fontsize: 21
+                time_fontsize: 90
+                size_hint: 0.4, 1
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            CircleButton:
+                size_hint: 0.05, 1
+                pos_hint: {"center_x": 0.65, "center_y": 0.5}
+                icon: "assets/images/arrow_right.png"
+      # Button:
+      #     pos_hint: {"center_x": 0.5, "y": 0}
+      #     size_hint: 1, 0.3
+      #     text: "Go back to menu"
+      #     on_release: root.manager.current = "homescreen"
+
+<CircleButton@Button>:
+    id: circ_btn
+    background_normal: ''
+    background_color: 0, 0, 0, 0
+    icon: ""
+    icon_frac: 0.65
+    canvas.before:
+        #white background
+        Color:
+            rgba: 1, 1, 1, 1
+        Ellipse:
+            size: self.size
+            pos: self.pos
+        #countour            
+        Color:
+            rgba: 0, 0, 0, 1
+        Line:
+            width: dp(2)
+            ellipse: self.x, self.y, self.width, self.height       
+   # Draw the icon
+    Image:
+        size_hint: None, None
+        size: circ_btn.width * circ_btn.icon_frac, circ_btn.height * circ_btn.icon_frac
+        pos: circ_btn.center_x - self.width / 2, circ_btn.center_y - self.height / 2
+        source: circ_btn.icon

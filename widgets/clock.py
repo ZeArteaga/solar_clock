@@ -26,4 +26,3 @@ class ClockWidget(BoxLayout):
                                                         
         if(self.todays_date != datetime.now().strftime('%A, %B %d')):
             self.todays_date = datetime.now().strftime('%A, %B %d')
-            

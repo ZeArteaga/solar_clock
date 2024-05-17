@@ -2,16 +2,16 @@
 ##:set rgb_yellow hex_to_rgb("FFFF8F")
 ##:set rgb_red hex_to_rgb("FF9B9B")
 ##:set rgb_blue hex_to_rgb("96DCF8")
-#:set rgba_green 0.5,1,0.5,1
-#:set rgba_yellow 1,1,0,1
-#:set rgba_red 1,0.5,0.5,1
-#:set rgba_blue 0.678,0.847,0.902,1
+##:set rgba_green 0.5,1,0.5,1
+##:set rgba_yellow 1,1,0,1
+##:set rgba_red 1,0.5,0.5,1
+##:set rgba_blue 0.678,0.847,0.902,1
 
 <Screen_Hourly>:
     #background with logos
     canvas.before:
         Color:
-            rgba: rgba_green
+            rgba: app.rgba_green
         Rectangle:
             size: self.size
         Color:
@@ -31,7 +31,7 @@
         #DEBUG
         #canvas.before:
         #    Color:
-        #        rgba: rgba_yellow
+        #        rgba: app.rgba_yellow
         #    Rectangle:
         #        size: self.size
         #        pos: self.pos
@@ -58,7 +58,12 @@
             pos_hint: {"center_x": 0.65, "top": 1}
             icon: "assets/images/arrow_right.png"
             icon_size: 0.7
-    
+    RectStack:
+        pos_hint: {"x": 0, "y": 0}
+        size_hint: 1, 0.15
+        orientation: "horizontal"
+        spacing: "3dp"
+        padding: "3dp", 0
 
 <CircleButton@Button>:
     id: circ_btn
@@ -85,3 +90,17 @@
         size: circ_btn.width * circ_btn.icon_size, circ_btn.height * circ_btn.icon_size
         pos: circ_btn.center_x - self.width / 2, circ_btn.center_y - self.height / 2
         source: circ_btn.icon
+
+<RectangleWidget>
+    canvas:
+        Color:
+            rgba: root.rect_color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        #countour            
+        Color:
+            rgba: 0, 0, 0, 1
+        Line:
+            width: dp(1)
+            rectangle: self.x, self.y, self.width, self.height        

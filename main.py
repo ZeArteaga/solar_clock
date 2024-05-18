@@ -33,11 +33,10 @@ class SolarClock(App):
                    )           
 
         sm = ScreenManager(transition=FadeTransition())
-        sm.add_widget(Screen_Home(name='homescreen'))
         sm.add_widget(Screen_Hourly(name='hourly'))
+        sm.add_widget(Screen_Home(name='homescreen'))
         
-        #DEBUG currently testing hourly mode
-        return Screen_Hourly()
+        return sm
 
 if __name__ == '__main__':
     SolarClock().run()

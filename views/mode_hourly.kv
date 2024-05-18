@@ -20,7 +20,7 @@
             size: self.size
             source: 'assets/images/background_logos.png'
     #reset screen (clock) 
-    on_leave: self.ids.clock.reschedule_time_event()    
+    on_pre_leave: self.ids.clock.reschedule_time_event()    
    
     #Homescreen Button
     Button:

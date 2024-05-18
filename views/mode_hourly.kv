@@ -19,7 +19,9 @@
         Rectangle:
             size: self.size
             source: 'assets/images/background_logos.png'
-
+    #reset screen (clock) 
+    on_leave: self.ids.clock.reschedule_time_event()    
+   
     #Homescreen Button
     Button:
         size_hint: 0.15, 0.15
@@ -46,8 +48,10 @@
             pos_hint: {"center_x": 0.35, "top": 1}
             icon: "assets/images/arrow_left.png"
             icon_size: 0.7
+            on_release: clock.decrement_hour()
         ClockWidget:
             id: clock
+            on_displayed_time: rect_stack.update_hour(args[1])
             label_alignment: "center"
             date_fontsize: 21
             time_fontsize: 90
@@ -58,7 +62,9 @@
             pos_hint: {"center_x": 0.65, "top": 1}
             icon: "assets/images/arrow_right.png"
             icon_size: 0.7
+            on_release: clock.increment_hour()
     RectStack:
+        id: rect_stack
         pos_hint: {"x": 0, "y": 0}
         size_hint: 1, 0.15
         orientation: "horizontal"

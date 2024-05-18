@@ -3,7 +3,6 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
 from kivy.properties import ListProperty
 from kivy.app import App
-from kivy.clock import Clock
 
 class Screen_Hourly(Screen):
     pass
@@ -12,7 +11,6 @@ class RectStack(BoxLayout):
     def __init__(self, **kwargs):
         super(RectStack, self).__init__(**kwargs)
         
-        self.app = App.get_running_app()
         self.rectangles = []
         self.index_high = 0 
         self.lower_rect_y = 0.6
@@ -25,14 +23,12 @@ class RectStack(BoxLayout):
                 rect.size_hint_y = self.lower_rect_y #non highlighted
             else:
                 rect.size_hint_y = 1    #highlight pos=0 in init
-
-        Clock.schedule_interval(self.update_hour, 1)        
     
-    def update_hour(self, dt):
+    def update_hour(self, displayed_time):
         #get clock widget from screen instance
-        curr_hour = int(self.parent.ids.clock.current_time[0:2])
-        if(curr_hour != self.index_high):
-            self.switch_highlight(self.index_high, curr_hour)
+        disp_hour = int(displayed_time[0:2])
+        if(disp_hour != self.index_high):
+            self.switch_highlight(self.index_high, disp_hour)
 
     def switch_highlight(self, old_index, new_index): 
         old_rect = self.rectangles[old_index]

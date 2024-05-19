@@ -24,9 +24,22 @@
    
     #Homescreen Button
     Button:
-        size_hint: 0.15, 0.15
+        canvas:
+            #Image
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: "assets/images/button_home.png" 
+            #countour            
+            Color:
+                rgba: 0, 0, 0, 1
+            Line:
+                width: dp(2)
+                rectangle: self.x, self.y, self.width, self.height  
+        size_hint: 0.10, 0.13
         pos_hint: {"top": 1, "right": 1}
-        background_normal: "assets/images/button_home.png"
+        background_normal: ""
+        background_color: 1, 1, 1, 1 
         on_release: root.manager.current = "homescreen"
     
     BoxLayout:
@@ -75,7 +88,11 @@
         padding: "10dp"
         
         LabelBox:
-        LabelBox:    
+            title: "Production"
+            value: 1000
+        LabelBox:
+            title: "Consumption"
+            value: 2000
 
     RectStack:
         id: rect_stack
@@ -128,7 +145,12 @@
 <LabelBox@BoxLayout>
     orientation: "vertical"
     color: 1,1,1,1
-
+    padding: "5dp"
+    spacing: "2dp"
+    title: ""
+    value: 0
+    title_font_size: 25
+    value_font_size: 25
     canvas.before:
         Color:
             rgba: self.color
@@ -137,7 +159,20 @@
             size: self.size
         #countour            
         Color:
-            rgba: 0, 0, 0, 2
+            rgba: 0, 0, 0, 1
         Line:
-            width: dp(1)
+            width: dp(2)
             rectangle: self.x, self.y, self.width, self.height            
+    Label:
+        text: root.title
+        font_name: "Aptos"
+        font_size: root.title_font_size
+        color: 0,0,0,1
+        bold: True
+        pos_hint: {"center_x": 0.5, "top": 1}
+    Label:
+        text: str(root.value)+" Wh"
+        font_name: "Aptos"
+        font_size: root.value_font_size
+        color: 0,0,0,1
+        pos_hint: {"center_x": 0.5, "y": 0}

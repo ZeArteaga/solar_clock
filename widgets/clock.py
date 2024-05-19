@@ -36,14 +36,12 @@ class ClockWidget(BoxLayout, EventDispatcher):
         self.unschedule_time_event()
         self.displayed_time = str((int(self.displayed_time[:2]) - 1) % 24).zfill(2) + ":--"
 
-    def reschedule_time_event(self):
+    def reschedule_time_event(self, dt=None):
         if(self.event_disp_time is None): #if unscheduled
             self.event_disp_time = Clock.schedule_interval(self.set_to_current_time, 1)
-            print("scheduled")
 
     def unschedule_time_event(self):
         if(self.event_disp_time is not None):
             Clock.unschedule(self.event_disp_time)
-            print("unschedule")
             self.event_disp_time = None        
       

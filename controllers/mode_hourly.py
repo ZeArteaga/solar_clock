@@ -3,9 +3,29 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
 from kivy.properties import ListProperty
 from kivy.app import App
+from kivy.clock import Clock
+
+RESET_CLOCK_TIME = 2
 
 class Screen_Hourly(Screen):
-    pass
+    def __init__(self, **kwargs):
+        super(Screen_Hourly, self).__init__(**kwargs)
+        self.inactivity_timer = None
+        self.reset_time = RESET_CLOCK_TIME
+
+    def increment_hour(self):
+        self.ids.clock.increment_hour()
+        self.trigger_inactivity_timer()
+
+    def decrement_hour(self):
+        self.ids.clock.decrement_hour()
+        self.trigger_inactivity_timer()
+
+    def trigger_inactivity_timer(self):
+        if self.inactivity_timer:
+            Clock.unschedule(self.inactivity_timer)
+        #call update to current time in reset_time seconds
+        self.inactivity_timer = Clock.schedule_once(self.ids.clock.reschedule_time_event, self.reset_time)
 
 class RectStack(BoxLayout):
     def __init__(self, **kwargs):

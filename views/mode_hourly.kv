@@ -48,7 +48,8 @@
             pos_hint: {"center_x": 0.35, "top": 1}
             icon: "assets/images/arrow_left.png"
             icon_size: 0.7
-            on_release: clock.decrement_hour()
+            on_release:
+                root.decrement_hour()
         ClockWidget:
             id: clock
             on_displayed_time: rect_stack.update_hour(args[1])
@@ -62,7 +63,20 @@
             pos_hint: {"center_x": 0.65, "top": 1}
             icon: "assets/images/arrow_right.png"
             icon_size: 0.7
-            on_release: clock.increment_hour()
+            on_release:
+                root.increment_hour()
+    
+    #Consumption and Production Labels
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint: 1, 0.25
+        pos_hint: {"center_x": 0.5, "top": 0.45}
+        spacing: "40dp"
+        padding: "10dp"
+        
+        LabelBox:
+        LabelBox:    
+
     RectStack:
         id: rect_stack
         pos_hint: {"x": 0, "y": 0}
@@ -100,7 +114,7 @@
 <RectangleWidget>
     canvas:
         Color:
-            rgba: root.rect_color
+            rgba: self.rect_color
         Rectangle:
             pos: self.pos
             size: self.size
@@ -109,4 +123,21 @@
             rgba: 0, 0, 0, 1
         Line:
             width: dp(1)
-            rectangle: self.x, self.y, self.width, self.height        
+            rectangle: self.x, self.y, self.width, self.height    
+
+<LabelBox@BoxLayout>
+    orientation: "vertical"
+    color: 1,1,1,1
+
+    canvas.before:
+        Color:
+            rgba: self.color
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        #countour            
+        Color:
+            rgba: 0, 0, 0, 2
+        Line:
+            width: dp(1)
+            rectangle: self.x, self.y, self.width, self.height            

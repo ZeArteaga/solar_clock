@@ -41,7 +41,7 @@ class MQTTSubscriber(EventDispatcher):
             self.dispatch('on_first_message_received')
         
         self.color_values = []
-        self.prod_value = []
+        self.prod_values = []
         self.cons_values = []
         for sublist in msg_decoded:
             if len(sublist) == 3:

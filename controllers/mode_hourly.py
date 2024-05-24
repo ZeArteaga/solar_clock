@@ -4,7 +4,7 @@ from kivy.uix.widget import Widget
 from kivy.properties import ListProperty
 from kivy.clock import Clock, mainthread
 
-RESET_CLOCK_TIME = 2
+RESET_CLOCK_TIME = 4
 
 class Screen_Hourly(Screen):
     background_color = ListProperty([1, 1, 1, 1])

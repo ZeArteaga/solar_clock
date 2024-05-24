@@ -11,7 +11,7 @@
     #background with logos
     canvas.before:
         Color:
-            rgba: app.rgba_green
+            rgba: self.background_color
         Rectangle:
             size: self.size
         Color:
@@ -65,7 +65,7 @@
                 root.decrement_hour()
         ClockWidget:
             id: clock
-            on_displayed_time: rect_stack.update_hour(args[1])
+            on_displayed_time: root.update_hour(args[1])
             label_alignment: "center"
             date_fontsize: 21
             time_fontsize: 90
@@ -88,11 +88,13 @@
         padding: "10dp"
         
         LabelBox:
+            id: prod_label
             title: "Production"
-            value: 1000
+            value: 0
         LabelBox:
+            id: cons_label
             title: "Consumption"
-            value: 2000
+            value: 0
 
     RectStack:
         id: rect_stack

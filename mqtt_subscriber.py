@@ -17,6 +17,7 @@ class MQTTSubscriber(EventDispatcher):
         
         self.register_event_type('on_first_message_received')
         self.first_message_received = False
+        self.register_event_type('on_new_data')
 
     def on_connect(self, client, userdata, flags, return_code, properties=None):
         if return_code == 0:
@@ -51,6 +52,7 @@ class MQTTSubscriber(EventDispatcher):
                 print(f"Warning: The list '{sublist}' does not have exactly 3 elements")
 
         print("Received: Color Values: ", self.color_values, "\nProduction Values: ", self.prod_values, "\nConsumption Values: ", self.cons_values)
+        self.dispatch('on_new_data')
         
     def on_log(self, client, userdata, level, buf):
         print(f"log: {buf}")
@@ -70,6 +72,9 @@ class MQTTSubscriber(EventDispatcher):
         self.client.loop_start()
 
     def on_first_message_received(self):
+        pass
+    
+    def on_new_data(self):
         pass
 
     def get_color_values(self):

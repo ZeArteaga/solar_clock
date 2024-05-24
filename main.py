@@ -36,9 +36,8 @@ class SolarClock(App):
 
         self.sm = ScreenManager(transition=FadeTransition())
         self.mqtt_client = MQTTSubscriber()
-        screen_blocked = Screen_Blocked(name='blocked', mqtt_client = self.mqtt_client)
-        self.sm.add_widget(screen_blocked)
-        self.sm.add_widget(Screen_Hourly(name='hourly'))
+        self.sm.add_widget(Screen_Blocked(name='blocked', mqtt_client=self.mqtt_client))
+        self.sm.add_widget(Screen_Hourly(name='hourly', app=self, mqtt_client=self.mqtt_client))
         self.sm.add_widget(Screen_Home(name='homescreen'))
         
         

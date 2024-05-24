@@ -7,8 +7,10 @@ from kivy.core.window import Window
 from kivy.core.text import LabelBase
 from kivy.uix.screenmanager import ScreenManager, FadeTransition
 from controllers.homescreen import Screen_Home
-from controllers.mode_hourly import Screen_Hourly      
+from controllers.mode_hourly import Screen_Hourly 
+from controllers.blocked_screen import Screen_Blocked    
 from kivy.properties import ListProperty
+from mqtt_subscriber import MQTTSubscriber
 
 class SolarClock(App):
 
@@ -32,11 +34,16 @@ class SolarClock(App):
                    fn_italic="assets/fonts/aptos/aptos-italic.ttf"
                    )           
 
-        sm = ScreenManager(transition=FadeTransition())
-        sm.add_widget(Screen_Hourly(name='hourly'))
-        sm.add_widget(Screen_Home(name='homescreen'))
-    
-        return sm
+        self.sm = ScreenManager(transition=FadeTransition())
+        self.mqtt_client = MQTTSubscriber()
+        screen_blocked = Screen_Blocked(name='blocked', mqtt_client = self.mqtt_client)
+        self.sm.add_widget(screen_blocked)
+        self.sm.add_widget(Screen_Hourly(name='hourly'))
+        self.sm.add_widget(Screen_Home(name='homescreen'))
+        
+        
+
+        return self.sm
 
 if __name__ == '__main__':
     SolarClock().run()

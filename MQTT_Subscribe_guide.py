@@ -31,7 +31,7 @@ def on_message(client, userdata, message):
 def on_log(client, userdata, level, buf):
     print(f"log: {buf}")
 
-broker_hostname = "172.21.5.47"
+broker_hostname = "192.168.1.69"
 port = 1883 
 
 client = mqtt.Client()

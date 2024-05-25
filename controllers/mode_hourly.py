@@ -3,7 +3,6 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
 from kivy.properties import ListProperty
 from kivy.clock import Clock, mainthread
-from kivy.properties import StringProperty, NumericProperty
 
 RESET_CLOCK_TIME = 4
 

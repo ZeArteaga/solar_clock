@@ -42,8 +42,8 @@ class Screen_Hourly(Screen):
         if(disp_hour != self.hour_selected):
             self.ids.rect_stack.switch_highlight(self.hour_selected, disp_hour)
             self.background_color = self.colors[disp_hour]
-            self.ids.prod_label.value = round(self.prod[disp_hour], 3)
-            self.ids.cons_label.value = round(self.cons[disp_hour], 3)
+            self.ids.prod_label.value = round(self.prod[disp_hour], 4)
+            self.ids.cons_label.value = round(self.cons[disp_hour], 4)
             self.hour_selected = disp_hour
 
     @mainthread
@@ -65,8 +65,8 @@ class Screen_Hourly(Screen):
             rectangles[h].change_color(self.colors[h])
         
         self.background_color = self.colors[self.hour_selected]
-        self.ids.prod_label.value = round(self.prod[self.hour_selected], 3)
-        self.ids.cons_label.value = round(self.cons[self.hour_selected], 3)
+        self.ids.prod_label.value = round(self.prod[self.hour_selected], 4)
+        self.ids.cons_label.value = round(self.cons[self.hour_selected], 4)
 
 class RectStack(BoxLayout):
     def __init__(self, **kwargs):

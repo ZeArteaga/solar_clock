@@ -3,6 +3,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.widget import Widget
 from kivy.properties import ListProperty
 from kivy.clock import Clock, mainthread
+from kivy.properties import StringProperty, NumericProperty
 
 RESET_CLOCK_TIME = 4
 
@@ -42,16 +43,16 @@ class Screen_Hourly(Screen):
         if(disp_hour != self.hour_selected):
             self.ids.rect_stack.switch_highlight(self.hour_selected, disp_hour)
             self.background_color = self.colors[disp_hour]
-            self.ids.prod_label.value = self.prod[disp_hour]
-            self.ids.cons_label.value = self.cons[disp_hour]
+            self.ids.prod_label.value = round(self.prod[disp_hour], 3)
+            self.ids.cons_label.value = round(self.cons[disp_hour], 3)
             self.hour_selected = disp_hour
 
     @mainthread
     def on_new_data(self, args):
         rectangles = self.ids.rect_stack.rectangles
-        colors_coded = self.mqtt_client.color_values
-        self.prod = self.mqtt_client.prod_values
-        self.cons = self.mqtt_client.cons_values
+        colors_coded = self.mqtt_client.get_color_values()
+        self.prod = self.mqtt_client.get_prod_values()
+        self.cons = self.mqtt_client.get_cons_values()
 
         for h in range(24):
             if colors_coded[h] == 0:
@@ -65,8 +66,8 @@ class Screen_Hourly(Screen):
             rectangles[h].change_color(self.colors[h])
         
         self.background_color = self.colors[self.hour_selected]
-        self.ids.prod_label.value = self.prod[self.hour_selected]
-        self.ids.cons_label.value = self.cons[self.hour_selected]
+        self.ids.prod_label.value = round(self.prod[self.hour_selected], 3)
+        self.ids.cons_label.value = round(self.cons[self.hour_selected], 3)
 
 class RectStack(BoxLayout):
     def __init__(self, **kwargs):

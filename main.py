@@ -1,4 +1,5 @@
 from os import environ
+import sys
 environ['DISPLAY'] = ':0' #set to local display
  
 from kivy.app import App
@@ -28,6 +29,7 @@ class SolarClock(App):
         Builder.load_file("views/common.kv")
         Builder.load_file("views/homescreen.kv") 
         Builder.load_file("views/mode_hourly.kv")
+        Builder.load_file("views/blocked_screen.kv")
 
         LabelBase.register(name="Aptos",
                    fn_regular="assets/fonts/aptos/aptos.ttf",
@@ -48,7 +50,17 @@ class SolarClock(App):
     @mainthread
     def on_disconnect(self, client, userdata, rc):
         print("Disconnected, reverting to blocked screen")
+        self.mqtt_client.loop_stop()
         self.sm.current = 'blocked'
+        
 
 if __name__ == '__main__':
-    SolarClock().run()
+    app = SolarClock()
+    try:
+        app.run()
+    except KeyboardInterrupt:
+        print("Application interrupted, stopping MQTT loop")
+        app.mqtt_client.loop_stop()
+        app.mqtt_client.disconnect()
+        sys.exit(0)
+    

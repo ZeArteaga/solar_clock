@@ -44,10 +44,10 @@ class MQTTSubscriber(EventDispatcher):
         self.prod_values = []
         self.cons_values = []
         for sublist in msg_decoded:
-            if len(sublist) == 3:
+            if len(sublist) == 3:   
                 self.color_values.append(sublist[0])
-                self.prod_values.append(sublist[1])
-                self.cons_values.append(sublist[2])
+                self.cons_values.append(float(sublist[1]))
+                self.prod_values.append(float(sublist[2]))
             else:
                 print(f"Warning: The list '{sublist}' does not have exactly 3 elements")
 
@@ -71,6 +71,12 @@ class MQTTSubscriber(EventDispatcher):
     def loop_start(self):
         self.client.loop_start()
 
+    def loop_stop(self):
+        self.client.loop_stop()
+
+    def disconnect(self):
+        self.client.disconnect()
+        
     def on_first_message_received(self):
         pass
     

@@ -12,7 +12,7 @@ class Screen_Blocked(Screen):
 
     def attempt_reconnect(self, dt):
         self.message = "Connecting..."
-        success = self.mqtt_client.connect(broker_hostname="192.168.1.69", port=1883, keep_alive=60)
+        success = self.mqtt_client.connect(broker_hostname="192.168.29.113", port=1883, keep_alive=60)
         if success:
             self.message = "Connected!"
             # If connection successful, start the MQTT client loop

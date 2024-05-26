@@ -1,0 +1,19 @@
+<Screen_Blocked>
+    message: ""
+    BoxLayout:
+        orientation: "vertical"
+        padding: "5dp"
+        spacing: "3dp"
+        Image:
+            source: "assets/images/logo_full.png"
+            size_hint: 1, 0.5
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            fit_mode: "contain"
+
+        Label:
+            font_name: "Aptos"
+            font_size: 30
+            text: root.message
+            color: 1,1,1,1
+            pos_hint: {"center_x": 0.5, "y": 0.1}
+            size_hint: 1, 0.2       

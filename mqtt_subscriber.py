@@ -33,23 +33,25 @@ class MQTTSubscriber(EventDispatcher):
     def on_message(self, client, userdata, message):
         msg_decoded = str(message.payload.decode("utf-8"))
         msg_decoded = ast.literal_eval(msg_decoded)
-        
+
+         # Check if msg_decoded is empty or any of its elements are not lists with exactly 3 elements
+        if not msg_decoded or any(len(sublist) != 3 for sublist in msg_decoded):
+            print("Invalid message: either empty or not all elements have exactly 3 elements.")
+            return
+
+        self.color_values = []
+        self.prod_values = []
+        self.cons_values = []
+        for sublist in msg_decoded:
+            self.color_values.append(sublist[0])
+            self.cons_values.append(float(sublist[1]))
+            self.prod_values.append(float(sublist[2]))
+
         #leave blocked mode
         if(not self.first_message_received):
             print("First message received!")
             self.first_message_received = True
             self.dispatch('on_first_message_received')
-        
-        self.color_values = []
-        self.prod_values = []
-        self.cons_values = []
-        for sublist in msg_decoded:
-            if len(sublist) == 3:   
-                self.color_values.append(sublist[0])
-                self.cons_values.append(float(sublist[1]))
-                self.prod_values.append(float(sublist[2]))
-            else:
-                print(f"Warning: The list '{sublist}' does not have exactly 3 elements")
 
         print("Received: Color Values: ", self.color_values, "\nProduction Values: ", self.prod_values, "\nConsumption Values: ", self.cons_values)
         self.dispatch('on_new_data')
